@@ -1,0 +1,76 @@
+<div class="login-wrapper">
+  <kt-logo></kt-logo>
+  <div class="login-holder" [formGroup]="form">
+    <div class="mb-3">
+      <h2 class="mb-4">If you don't have an account, please create either go to <a routerLink="/login">login page</a></h2>
+      <div class="input-group flex-nowrap input-group-lg">
+        <div class="input-group-prepend">
+          <kt-icon class="input-group-text" name="cat"></kt-icon>
+        </div>
+        <input
+          formControlName="email"
+          type="text"
+          placeholder="User name"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': form.get('email').touched && (form.get('email')?.errors?.required || form.get('email')?.errors?.email)}
+          "
+        >
+      </div>
+      <ng-container *ngIf="form.get('email').touched">
+        <div class="invalid-feedback" *ngIf="form.get('email')?.errors?.required">
+          Please fill in this required field.
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('email')?.errors?.email">
+          Please enter a valid e-mail address.
+        </div>
+      </ng-container>
+    </div>
+    <div class="mb-3">
+      <div class="input-group flex-nowrap input-group-lg">
+        <div class="input-group-prepend">
+          <kt-icon class="input-group-text" name="key"></kt-icon>
+        </div>
+        <input
+          formControlName="password"
+          type="password"
+          placeholder="Password"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': form.get('password').touched && (form.get('password')?.errors?.required || form.get('password')?.errors?.minlength)}
+          "
+        >
+      </div>
+      <ng-container *ngIf="form.get('password').touched">
+        <div class="invalid-feedback" *ngIf="form.get('password')?.errors?.required">
+          Please fill in this required field.
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('password')?.errors?.minlength">
+          Minimum password length: {{ passwordLength }} Characters.
+        </div>
+      </ng-container>
+    </div>
+    <div class="mb-3">
+      <div class="input-group flex-nowrap input-group-lg">
+        <div class="input-group-prepend">
+          <kt-icon class="input-group-text" name="key"></kt-icon>
+        </div>
+        <input
+          formControlName="confirmPassword"
+          type="password"
+          placeholder="Confirm password"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': form.get('confirmPassword').touched && form.get('confirmPassword')?.errors?.confirmPassword}
+          "
+        >
+      </div>
+      <div class="invalid-feedback" *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword')?.errors?.confirmPassword">
+        Password doesn't match.
+      </div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <button (click)="signUp()" type="button" class="btn btn-primary btn-lg">Sing Up</button>
+    </div>
+  </div>
+</div>

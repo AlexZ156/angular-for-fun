@@ -1,0 +1,54 @@
+<div class="login-wrapper">
+  <kt-logo></kt-logo>
+  <div class="login-holder" [formGroup]="form">
+    <div class="input-group flex-nowrap input-group-lg mb-3">
+      <div class="input-group-prepend">
+        <kt-icon class="input-group-text" name="cat"></kt-icon>
+      </div>
+      <input
+        formControlName="email"
+        type="text"
+        placeholder="User name"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': form.get('email').touched && (form.get('email')?.errors?.required || form.get('email')?.errors?.email)}
+        "
+      >
+    </div>
+    <ng-container *ngIf="form.get('email').touched">
+      <div class="invalid-feedback" *ngIf="form.get('email')?.errors?.required">
+        Please fill in this required field.
+      </div>
+      <div class="invalid-feedback" *ngIf="form.get('email')?.errors?.email">
+        Please enter a valid e-mail address.
+      </div>
+    </ng-container>
+    <div class="input-group flex-nowrap input-group-lg mb-3">
+      <div class="input-group-prepend">
+        <kt-icon class="input-group-text" name="key"></kt-icon>
+      </div>
+      <input
+        formControlName="password"
+        type="password"
+        placeholder="Password"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': form.get('password').touched && (form.get('password')?.errors?.required || form.get('password')?.errors?.minlength)}
+        "
+      >
+    </div>
+    <ng-container *ngIf="form.get('password').touched">
+      <div class="invalid-feedback" *ngIf="form.get('password')?.errors?.required">
+        Please fill in this required field.
+      </div>
+      <div class="invalid-feedback" *ngIf="form.get('password')?.errors?.minlength">
+        Minimum password length: {{ passwordLength }} Characters.
+      </div>
+    </ng-container>
+    <div class="d-flex justify-content-between">
+      <button (click)="signIn()" type="button" class="btn btn-primary btn-lg">Sing In</button>
+      <a routerLink="/login/signup">Sign Up</a>
+    </div>
+    <div class="alert alert-danger mt-3" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+</div>
